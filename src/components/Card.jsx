@@ -12,7 +12,7 @@ export default function Card({ children, style }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor:colors.green700,
+        backgroundColor:colors.green30000,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -21,5 +21,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.37,
         shadowRadius: 7.49,
         elevation: 12,
+        
     }
 })
