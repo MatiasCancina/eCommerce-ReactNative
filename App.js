@@ -1,10 +1,11 @@
-import { StyleSheet, View } from 'react-native';
 import Home from './src/screens/Home';
 import { colors } from './src/global/colors';
+import { View, StyleSheet } from 'react-native';
+import ItemListCategory from './src/screens/ItemListCategory';
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} >
       <Home />
     </View>
   );
