@@ -3,5 +3,5 @@ export const colors = {
     green300: '#ccd5ae',
     brown100: '#fefae0',
     brown200:'#faedcd',
-    brown600: '#d4a373'
+    brown600: '#d4a373',
 }

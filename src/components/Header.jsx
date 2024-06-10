@@ -12,14 +12,16 @@ export default function Header({ title }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.brown600,
+    width: "100%",
     height: 100,
+    backgroundColor: colors.brown600,
     justifyContent: "center",
     alignItems: "center",
+    alignSelf: "center",
   },
   title: {
     fontSize: 30,
+    fontWeight: "500",
     marginTop: 20,
-    fontWeight: '500'
   },
 });

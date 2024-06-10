@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import categories from "../data/categories.json";
 import Category from "./Category";
 import { colors } from "../global/colors";
@@ -10,7 +10,7 @@ export default function Categories({setCategorySelected}) {
         data={categories}
         keyExtractor={(category) => category}
         renderItem={({ item }) => <Category category={item} selectCategory={setCategorySelected}/>}
-        style={{paddingVertical:20}}
+        style={{width:'100%'}}
       />
     </View>
   );
@@ -21,5 +21,10 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingBottom: 200,
     backgroundColor: colors.brown100,
+    // flex: 1,
+    // flexDirection: "column",
+    // justifyContent: "center",
+    // alignItems: "center",
+    // padding:10
   },
 });

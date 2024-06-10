@@ -3,28 +3,30 @@ import { useEffect, useState } from "react";
 import products from "../data/products.json";
 import { colors } from "../global/colors";
 import Search from "../components/Search";
-import { capitalizeFirstLetter } from "../global/capitalizeFirstLetter";
 import ProductItem from "../components/ProductItem";
 export default function ItemListCategory({
   categorySelected,
   setCategorySelected,
+  setItemIdSelected,
 }) {
   const [keyword, setKeyword] = useState("");
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [error, setError] = useState("");
 
-  console.log(
-    categorySelected,
-    productsFiltered.map((p) => p.title)
-  );
-
   useEffect(() => {
-    const regex = /\d/;
-    const Digits = regex.test(keyword);
-    console.log(Digits);
+    const regexDigits = /\d/;
+    const hasDigits = regexDigits.test(keyword);
 
-    if (Digits) {
+    if (hasDigits) {
       setError("Don´t use digits");
+      return;
+    }
+
+    const regexThreeOrMoreCharacters = /[a-zA-Z]{3,}/;
+    const hasThreeOrMoreChr = regexThreeOrMoreCharacters.test(keyword);
+
+    if (!hasThreeOrMoreChr && keyword.length) {
+      setError("Type 3 or more characters");
       return;
     }
 
@@ -37,18 +39,21 @@ export default function ItemListCategory({
     );
 
     setProductsFiltered(filterProducts);
+    setError("");
   }, [keyword, categorySelected]);
 
   return (
     <View style={styles.container}>
       <Search onSearch={setKeyword} goBack={() => setCategorySelected("")} />
       {error ? (
-        <Text style={{justifyContent:'center'}} >{error}</Text>
+        <Text style={styles.error}>{error}</Text>
       ) : (
         <FlatList
           data={productsFiltered}
-          renderItem={({ item }) => <ProductItem product={item} />}
-          keyExtractor={(product) => product.id}
+          renderItem={({ item }) => (
+            <ProductItem product={item} setItemIdSelected={setItemIdSelected} />
+          )}
+          keyExtractor={(product) => product.id.toString()}
         />
       )}
     </View>
@@ -57,8 +62,14 @@ export default function ItemListCategory({
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     paddingBottom: 200,
     backgroundColor: colors.brown100,
+  },
+  error: {
+    fontSize: 20,
+    color: colors.brown600,
+    fontWeight: "600",
+    textAlign: "center",
+    marginTop: 20,
   },
 });

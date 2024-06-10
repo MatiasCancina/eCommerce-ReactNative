@@ -1,38 +1,50 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text } from "react-native";
 import React from "react";
 import { colors } from "../global/colors";
 import Card from "./Card";
+import { capitalizeFirstLetter } from "../global/capitalizeFirstLetter";
 
-export default function ProductItem({ product }) {
-  console.log(product.images[0]);
+export default function ProductItem({ product, setItemIdSelected }) {
   return (
-    <Card style={styles.container}>
-      <Text style={styles.title}>{product.title}</Text>
-      <Image
-        resizeMode="cover"
-        source={{ uri: product.images[0] }}
-        style={styles.image}
-      />
-    </Card>
+    <Pressable
+      onPress={() => {
+        setItemIdSelected(product.id);
+      }}
+    >
+      <Card style={styles.container}>
+        <Text style={styles.title}>{capitalizeFirstLetter(product.title)}</Text>
+        <Image
+          resizeMode="cover"
+          style={styles.image}
+          source={{ uri: product.images[0] }}
+        />
+      </Card>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 30,
+    marginHorizontal: 40,
     marginVertical: 10,
-    padding: 10,
-    paddingVertical: 20,
-    justifyContent: "center",
-    alignItems: "flex-start ",
+    alignItems: "center",
     borderWidth: 4,
     borderRadius: 10,
     borderColor: colors.brown600,
     backgroundColor: colors.brown200,
+    height: 120,
+    width: 300,
+    justifyContent: "space-between",
+    flexDirection: "row",
   },
-  image: { height: 120, width: 100, borderRadius: 8 },
+  image: {
+    height: "100%",
+    width: "40%",
+  },
   title: {
     fontFamily: "Inter-Medium",
     fontSize: 17,
+    width: "60%",
+    paddingHorizontal: 10,
   },
 });
