@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import React, { useState } from "react";
 
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 18,
-    marginVertical: 10,
+    paddingVertical: 10,
+    backgroundColor: colors.brown600,
   },
   input: {
     width: 250,

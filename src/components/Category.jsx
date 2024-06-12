@@ -6,7 +6,7 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
 
-export default function Category({ category, selectCategory }) {
+export default function Category({ category, navigation }) {
   const [fontsLoaded, fontError] = useFonts({
     "Inter-Medium": require("../../assets/fonts/Inter-Medium.ttf"),
   });
@@ -24,8 +24,17 @@ export default function Category({ category, selectCategory }) {
   return (
     <View onLayout={onLayoutRootView}>
       <Card style={styles.cardContainer}>
-        <Pressable onPress={() => selectCategory(category)}>
-          <Text style={styles.title}>{capitalizeFirstLetter(category)}</Text>
+        <Pressable
+          onPress={() => navigation.navigate('ItemListCategory', {category})}
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Text style={styles.title}>
+            {capitalizeFirstLetter(category.label)}
+          </Text>
+          {category.icon}
         </Pressable>
       </Card>
     </View>

@@ -9,11 +9,13 @@ import {
 import { useEffect, useState } from "react";
 import products from "../data/products.json";
 
-export default function ItemDetail({ idSelected, setProductSelected }) {
+export default function ItemDetail({ route, navigation }) {
   const { width, height } = useWindowDimensions();
   const [orientation, setOrienation] = useState("portait");
 
   const [product, setProduct] = useState(null);
+
+  const { productId: idSelected } = route.params;
 
   useEffect(() => {
     if (width > height) setOrienation("landscape");
@@ -26,13 +28,13 @@ export default function ItemDetail({ idSelected, setProductSelected }) {
     setProduct(productSelected);
   }, [idSelected]);
 
-  if(!product) return <Text>Loading...</Text>
-  
+  if (!product) return <Text>Loading...</Text>;
+
   return (
     <View>
       <Button
         onPress={() => {
-          setProductSelected("");
+          navigation.goBack();
         }}
         title="Back"
       />
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start",
     padding: 10,
+    width: "100%",
   },
   mainContainerLandscape: {
     flexDirection: "row",

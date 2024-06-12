@@ -1,20 +1,33 @@
-import { StyleSheet, View } from "react-native";
+import { Button, StyleSheet, View } from "react-native";
 import Categories from "../components/Categories";
 import Header from "../components/Header";
 import ItemListCategory from "./ItemListCategory";
 import { useState } from "react";
 import ItemDetail from "./ItemDetail";
 
-export default function Home() {
+export default function Home({ navigation }) {
   const [categorySelected, setCategorySelected] = useState("");
   const [itemIdSelected, setItemIdSelected] = useState("");
-  
+
+  const info = {
+    id: 1243,
+    total: 300,
+    medidas: { peso: 45, alto: 453 },
+  };
+
+  const goUs = () => {
+    navigation.navigate("Us", info);
+  };
+
   return (
-    <View >
+    <View>
       {!categorySelected ? (
         <>
-          <Header title={"Categories"} />
-          <Categories setCategorySelected={setCategorySelected} />
+          <Button onPress={() => goUs()} title="Go Us" />
+          <Categories
+            setCategorySelected={setCategorySelected}
+            navigation={navigation}
+          />
         </>
       ) : (
         <>
@@ -29,7 +42,7 @@ export default function Home() {
             </>
           ) : (
             <>
-              <Header title={'Detail'} />
+              <Header title={"Detail"} />
               <ItemDetail
                 idSelected={itemIdSelected}
                 setProductSelected={setItemIdSelected}

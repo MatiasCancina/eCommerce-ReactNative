@@ -1,16 +1,18 @@
 import { FlatList, StyleSheet, View } from "react-native";
-import categories from "../data/categories.json";
 import Category from "./Category";
 import { colors } from "../global/colors";
+import { categories } from "../data/categories";
 
-export default function Categories({setCategorySelected}) {
+export default function Categories({ navigation, route }) {
   return (
     <View style={styles.container}>
       <FlatList
         data={categories}
-        keyExtractor={(category) => category}
-        renderItem={({ item }) => <Category category={item} selectCategory={setCategorySelected}/>}
-        style={{width:'100%'}}
+        keyExtractor={(category) => category.label}
+        renderItem={({ item }) => (
+          <Category category={item} navigation={navigation} />
+        )}
+        style={{ width: "100%" }}
       />
     </View>
   );
@@ -19,12 +21,7 @@ export default function Categories({setCategorySelected}) {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    paddingBottom: 200,
+    paddingBottom: 67,
     backgroundColor: colors.brown100,
-    // flex: 1,
-    // flexDirection: "column",
-    // justifyContent: "center",
-    // alignItems: "center",
-    // padding:10
   },
 });

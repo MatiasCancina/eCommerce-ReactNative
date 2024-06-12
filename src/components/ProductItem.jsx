@@ -4,11 +4,11 @@ import { colors } from "../global/colors";
 import Card from "./Card";
 import { capitalizeFirstLetter } from "../global/capitalizeFirstLetter";
 
-export default function ProductItem({ product, setItemIdSelected }) {
+export default function ProductItem({ product, navigation }) {
   return (
     <Pressable
       onPress={() => {
-        setItemIdSelected(product.id);
+        navigation.navigate("ItemDetail", { productId: product.id });
       }}
     >
       <Card style={styles.container}>

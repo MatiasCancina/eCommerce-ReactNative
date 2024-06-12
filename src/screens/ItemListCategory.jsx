@@ -5,13 +5,14 @@ import { colors } from "../global/colors";
 import Search from "../components/Search";
 import ProductItem from "../components/ProductItem";
 export default function ItemListCategory({
-  categorySelected,
-  setCategorySelected,
-  setItemIdSelected,
+  navigation,
+  route
 }) {
   const [keyword, setKeyword] = useState("");
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [error, setError] = useState("");
+
+  const {category: categorySelected} = route.params
 
   useEffect(() => {
     const regexDigits = /\d/;
@@ -31,7 +32,7 @@ export default function ItemListCategory({
     }
 
     const preFilteredProducts = products.filter(
-      (p) => p.category === categorySelected
+      (p) => p.category === categorySelected.label
     );
 
     const filterProducts = preFilteredProducts.filter((product) =>
@@ -44,14 +45,15 @@ export default function ItemListCategory({
 
   return (
     <View style={styles.container}>
-      <Search onSearch={setKeyword} goBack={() => setCategorySelected("")} />
+      <Search onSearch={setKeyword} goBack={() => navigation.goBack()} />
+
       {error ? (
         <Text style={styles.error}>{error}</Text>
       ) : (
         <FlatList
           data={productsFiltered}
           renderItem={({ item }) => (
-            <ProductItem product={item} setItemIdSelected={setItemIdSelected} />
+            <ProductItem product={item} navigation={navigation} />
           )}
           keyExtractor={(product) => product.id.toString()}
         />
@@ -62,7 +64,6 @@ export default function ItemListCategory({
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: 200,
     backgroundColor: colors.brown100,
   },
   error: {
