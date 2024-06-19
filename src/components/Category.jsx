@@ -27,7 +27,7 @@ export default function Category({ category, navigation }) {
   }
 
   const handleNavigate = () => {
-    dispatch(setCategorySelected(category))
+    dispatch(setCategorySelected(category.label))
     navigation.navigate("ItemListCategory", { category });
   };
 
