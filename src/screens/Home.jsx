@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import ItemListCategory from "./ItemListCategory";
 import { useState } from "react";
 import ItemDetail from "./ItemDetail";
+import Counter from "../components/Counter";
 
 export default function Home({ navigation }) {
   const [categorySelected, setCategorySelected] = useState("");
@@ -21,6 +22,7 @@ export default function Home({ navigation }) {
 
   return (
     <View>
+      <Counter />
       {!categorySelected ? (
         <>
           <Button onPress={() => goUs()} title="Go Us" />

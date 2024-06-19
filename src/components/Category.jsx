@@ -6,7 +6,12 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+import { setCategorySelected } from "../features/ShopSlice";
+
 export default function Category({ category, navigation }) {
+  const dispatch = useDispatch();
+
   const [fontsLoaded, fontError] = useFonts({
     "Inter-Medium": require("../../assets/fonts/Inter-Medium.ttf"),
   });
@@ -21,11 +26,16 @@ export default function Category({ category, navigation }) {
     return null;
   }
 
+  const handleNavigate = () => {
+    dispatch(setCategorySelected(category))
+    navigation.navigate("ItemListCategory", { category });
+  };
+
   return (
     <View onLayout={onLayoutRootView}>
       <Card style={styles.cardContainer}>
         <Pressable
-          onPress={() => navigation.navigate('ItemListCategory', {category})}
+          onPress={handleNavigate}
           style={{
             flexDirection: "row",
             justifyContent: "space-between",

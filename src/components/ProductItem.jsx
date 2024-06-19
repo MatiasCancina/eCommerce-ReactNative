@@ -4,13 +4,19 @@ import { colors } from "../global/colors";
 import Card from "./Card";
 import { capitalizeFirstLetter } from "../global/capitalizeFirstLetter";
 
+import { useDispatch } from "react-redux";
+import { setItemSelected } from "../features/ShopSlice";
+
 export default function ProductItem({ product, navigation }) {
+  const dispatch = useDispatch();
+
+  const handleNavigate = () => {
+    dispatch(setItemSelected(product.title));
+    navigation.navigate("ItemDetail", { productId: product.id });
+  };
+
   return (
-    <Pressable
-      onPress={() => {
-        navigation.navigate("ItemDetail", { productId: product.id });
-      }}
-    >
+    <Pressable onPress={handleNavigate}>
       <Card style={styles.container}>
         <Text style={styles.title}>{capitalizeFirstLetter(product.title)}</Text>
         <Image
