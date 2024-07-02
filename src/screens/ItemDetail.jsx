@@ -7,26 +7,20 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { useEffect, useState } from "react";
-import products from "../data/products.json";
+import { useGetProductByIdQuery } from "../services/shopServices";
 
 export default function ItemDetail({ route, navigation }) {
   const { width, height } = useWindowDimensions();
-  const [orientation, setOrienation] = useState("portait");
-
-  const [product, setProduct] = useState(null);
+  const [orientation, setOrienation] = useState("portait");  
 
   const { productId: idSelected } = route.params;
+
+  const {data: product} = useGetProductByIdQuery(idSelected)
 
   useEffect(() => {
     if (width > height) setOrienation("landscape");
     else setOrienation("portrait");
   }, [width, height]);
-
-  useEffect(() => {
-    const productSelected = products.find((prod) => prod.id === idSelected);
-
-    setProduct(productSelected);
-  }, [idSelected]);
 
   if (!product) return <Text>Loading...</Text>;
 

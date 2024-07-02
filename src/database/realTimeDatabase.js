@@ -1,0 +1,1 @@
+export const baseUrl = 'https://ecommerce-reactnative-fad07-default-rtdb.firebaseio.com/'

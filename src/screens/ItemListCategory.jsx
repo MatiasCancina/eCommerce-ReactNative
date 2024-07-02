@@ -1,19 +1,23 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { useEffect, useState } from "react";
-import products from "../data/products.json";
 import { colors } from "../global/colors";
 import Search from "../components/Search";
 import ProductItem from "../components/ProductItem";
-export default function ItemListCategory({
-  navigation,
-  route
-}) {
+import { useGetProductsByCategoryQuery } from "../services/shopServices";
+import { useSelector } from "react-redux";
+
+export default function ItemListCategory({ navigation, route }) {
   const [keyword, setKeyword] = useState("");
-  const [productsFiltered, setProductsFiltered] = useState([]);
   const [error, setError] = useState("");
 
-  const {category: categorySelected} = route.params
+  const categorySelected = useSelector(state => state.shop.value.categorySelected);
 
+  const {
+    data: productsFetched,
+    isLoading,
+    error: errorFetched,
+  } = useGetProductsByCategoryQuery(categorySelected);
+  
   useEffect(() => {
     const regexDigits = /\d/;
     const hasDigits = regexDigits.test(keyword);
@@ -30,18 +34,7 @@ export default function ItemListCategory({
       setError("Type 3 or more characters");
       return;
     }
-
-    const preFilteredProducts = products.filter(
-      (p) => p.category === categorySelected.label
-    );
-
-    const filterProducts = preFilteredProducts.filter((product) =>
-      product.title.toLocaleLowerCase().includes(keyword.toLocaleLowerCase())
-    );
-
-    setProductsFiltered(filterProducts);
-    setError("");
-  }, [keyword, categorySelected]);
+  }, [keyword, categorySelected, productsFetched, isLoading]);
 
   return (
     <View style={styles.container}>
@@ -51,7 +44,7 @@ export default function ItemListCategory({
         <Text style={styles.error}>{error}</Text>
       ) : (
         <FlatList
-          data={productsFiltered}
+          data={productsFetched}
           renderItem={({ item }) => (
             <ProductItem product={item} navigation={navigation} />
           )}

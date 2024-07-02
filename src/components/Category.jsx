@@ -5,8 +5,9 @@ import { capitalizeFirstLetter } from "../global/capitalizeFirstLetter";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
+import { Feather } from "@expo/vector-icons";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setCategorySelected } from "../features/ShopSlice";
 
 export default function Category({ category, navigation }) {
@@ -27,7 +28,7 @@ export default function Category({ category, navigation }) {
   }
 
   const handleNavigate = () => {
-    dispatch(setCategorySelected(category.label))
+    dispatch(setCategorySelected(category.label));
     navigation.navigate("ItemListCategory", { category });
   };
 
@@ -44,7 +45,11 @@ export default function Category({ category, navigation }) {
           <Text style={styles.title}>
             {capitalizeFirstLetter(category.label)}
           </Text>
-          {category.icon}
+          <Feather
+            name={category.icon.name}
+            size={category.icon.size}
+            color={category.icon.color}
+          />
         </Pressable>
       </Card>
     </View>
