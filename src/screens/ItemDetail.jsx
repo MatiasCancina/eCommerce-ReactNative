@@ -6,21 +6,35 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
+
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
 import { useGetProductByIdQuery } from "../services/shopServices";
+import { addCartItem } from "../features/CartSlice";
 
 export default function ItemDetail({ route, navigation }) {
   const { width, height } = useWindowDimensions();
-  const [orientation, setOrienation] = useState("portait");  
+  const [orientation, setOrienation] = useState("portait");
 
   const { productId: idSelected } = route.params;
 
-  const {data: product} = useGetProductByIdQuery(idSelected)
+  const dispatch = useDispatch();
+
+  const {
+    data: product,
+    error,
+    isLoading,
+  } = useGetProductByIdQuery(idSelected);
 
   useEffect(() => {
     if (width > height) setOrienation("landscape");
     else setOrienation("portrait");
   }, [width, height]);
+
+  const handleAddCart = () => {
+    dispatch(addCartItem({ ...product, quantity: 1 }));
+  };
 
   if (!product) return <Text>Loading...</Text>;
 
@@ -56,7 +70,7 @@ export default function ItemDetail({ route, navigation }) {
           <Text>{product.title} </Text>
           <Text>{product.description} </Text>
           <Text style={styles.price}>${product.price}</Text>
-          <Button title="Add cart" />
+          <Button title="Add cart" onPress={handleAddCart} />
         </View>
       </View>
     </View>

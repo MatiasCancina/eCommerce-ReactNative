@@ -1,13 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
+import { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import HomeStackNavigator from "./HomeStackNavigator";
 import BottomTabNavigator from "./BottomTabNavigator";
+import AuthStackNavigator from "./AuthStackNavigator";
+import { useSelector } from "react-redux";
 
 export default function Navigator() {
+  // const [user, setUser] = useState(null);
+  const { user } = useSelector((state) => state.auth.value);
+
   return (
     <NavigationContainer>
-      {/* <HomeStackNavigator /> */}
-      <BottomTabNavigator />
+      {user ? <BottomTabNavigator /> : <AuthStackNavigator />}
     </NavigationContainer>
   );
 }

@@ -48,7 +48,7 @@ export default function ItemListCategory({ navigation, route }) {
           renderItem={({ item }) => (
             <ProductItem product={item} navigation={navigation} />
           )}
-          keyExtractor={(product) => product.id.toString()}
+          keyExtractor={(product) => product.id}
         />
       )}
     </View>
@@ -58,6 +58,7 @@ export default function ItemListCategory({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.brown100,
+    height: '100%',
   },
   error: {
     fontSize: 20,

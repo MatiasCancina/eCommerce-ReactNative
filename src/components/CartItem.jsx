@@ -6,10 +6,10 @@ export default function CartItem({ item }) {
     <View style={styles.card}>
       <View style={styles.textContainer}>
         <Text style={styles.text}>
-          {item.title} {item.quantity}
+          {item.title} X {item.quantity}
         </Text>
         <Text>{item.brand}</Text>
-        <Text>{item.price}</Text>
+        <Text>$ {item.price}</Text>
       </View>
       <Entypo name="trash" size={30} color={"black"} />
     </View>
