@@ -10,13 +10,14 @@ import InputForm from "../components/InputForm";
 import { useSignUpMutation } from "../services/authServices";
 
 import { setUser } from "../features/UserSlice";
+import { signUpSchema } from "../validations/signUpSchema";
 
 const Signup = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [errorMail, setErrorMail] = useState("");
   const [password, setPassword] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
-  const [confirmPassword, setconfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
@@ -35,10 +36,31 @@ const Signup = ({ navigation }) => {
   }, [result]);
 
   const onSubmit = () => {
-    triggerSignUp({ email, password, returnSecureToken: true });
-  };
+    try {
+      setErrorPassword("");
+      setConfirmPassword("");
+      setErrorConfirmPassword("");
 
-  //console.log(result)
+      signUpSchema.validateSync();
+
+      triggerSignUp({ email, password, returnSecureToken: true });
+    } catch (error) {
+      console.log("Signup Error");
+      console.log(error.path);
+      console.log(error.message);
+
+      switch (error.path) {
+        case "email":
+          setErrorMail(error.message);
+        case "password":
+          setErrorPassword(error.message);
+        case "confirmPassword":
+          setErrorConfirmPassword(error.message);
+        default:
+          break;
+      }
+    }
+  };
 
   return (
     <View style={styles.main}>
@@ -53,7 +75,7 @@ const Signup = ({ navigation }) => {
         />
         <InputForm
           label={"confirm password"}
-          onChange={setconfirmPassword}
+          onChange={setConfirmPassword}
           error={errorConfirmPassword}
           isSecure={true}
         />

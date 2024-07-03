@@ -4,12 +4,12 @@ import { colors } from "../global/colors";
 
 const InputForm = ({ label, onChange, error = "", isSecure = false }) => {
   const [input, setInput] = useState("");
-  
+
   const onChangeText = (text) => {
     setInput(text);
     onChange(text);
   };
-  
+
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.subtitle}>{label}</Text>

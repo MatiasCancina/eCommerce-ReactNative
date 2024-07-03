@@ -12,13 +12,13 @@ export const authApi = createApi({
                 body: auth,
             }),
         }),
-        /*     signIn: builder.mutation({
-              query: ({ ...auth }) => ({
+        signIn: builder.mutation({
+            query: ({ ...auth }) => ({
                 url: `/accounts:signInWithPassword?key=${apiKey}`,
                 method: "POST",
                 body: auth,
-              }),
-            }), */
+            }),
+        }),
     }),
 });
 
