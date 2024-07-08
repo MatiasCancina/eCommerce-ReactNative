@@ -1,9 +1,13 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import { colors } from "../global/colors";
+import { useSelector } from "react-redux";
+import { useGetProfileImageQuery } from "../services/shopServices";
 
 export default function MyProfile({ navigation }) {
   const [image, setImage] = useState(null);
+  const { imageCamer, localId } = useSelector(state => state.auth.value)
+  const {data: imageFromBase} = useGetProfileImageQuery(localId)
 
   return (
     <View style={styles.container}>
@@ -15,7 +19,7 @@ export default function MyProfile({ navigation }) {
         />
       )}
       <Pressable
-      onPress={() => navigation.navigate('ImageSelectorScreen')}
+        onPress={() => navigation.navigate('ImageSelectorScreen')}
         style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.6 : 1 }]}
       >
         <Text>Add Profile Picture</Text>

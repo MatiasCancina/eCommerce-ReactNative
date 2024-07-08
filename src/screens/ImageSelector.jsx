@@ -1,12 +1,16 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { colors } from "../global/colors";
 import * as ImagePicker from "expo-image-picker";
+import { setCameraImage } from "../features/UserSlice";
+import { usePostProfileImageMutation } from "../services/shopServices";
 
 export default function ImageSelector({ navigation }) {
   const [image, setImage] = useState(null);
+  const [triggerPostImage, result] = usePostProfileImageMutation()
   const dispatch = useDispatch();
+  const { localId } = useSelector(state => state.auth.value)
 
   const verifyCameraPermissions = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -26,7 +30,7 @@ export default function ImageSelector({ navigation }) {
         allowsEditing: true,
         aspect: [1, 1],
         base64: true,
-        quality: 1,
+        quality: 0.1,
       });
       //? agregar opcion para seleccionar desde galeria
 
@@ -36,7 +40,15 @@ export default function ImageSelector({ navigation }) {
     }
   };
 
-  const confirmImage = () => {};
+  const confirmImage = () => {
+    try {
+      dispatch(setCameraImage(image))
+      triggerPostImage({ image, localId })
+      navigation.goBack()
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -57,6 +69,7 @@ export default function ImageSelector({ navigation }) {
             <Text>Take new Photo</Text>
           </Pressable>
           <Pressable
+            onPress={confirmImage}
             style={({ pressed }) => [
               styles.btn,
               { opacity: pressed ? 0.6 : 1 },
