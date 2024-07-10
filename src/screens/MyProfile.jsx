@@ -3,36 +3,46 @@ import React, { useEffect, useState } from "react";
 import { colors } from "../global/colors";
 import { useSelector } from "react-redux";
 import { useGetProfileImageQuery } from "../services/shopServices";
+import AddButton from "../components/AddButton";
 
 export default function MyProfile({ navigation }) {
-  const [image, setImage] = useState(null);
   const { imageCamera, localId } = useSelector((state) => state.auth.value);
   const { data: imageFromBase } = useGetProfileImageQuery(localId);
 
-  useEffect(() => {
-    if (imageFromBase) {
-      console.log(imageFromBase);
-      setImage(imageFromBase.image);
-    }
-  }, [imageFromBase]);
+  const launchCamera = async () => {
+    navigation.navigate("ImageSelectorScreen");
+  };
+
+  const launchLocation = async () => {
+    navigation.navigate("ListAdressScreen");
+  };
+
+  const defaultImageRoute = "../../assets/user.png";
 
   return (
     <View style={styles.container}>
-      {image ? (
-        <Image style={styles.img} resizeMode="cover" source={{ uri: image }} />
+      {imageFromBase || imageCamera ? (
+        <Image
+          source={{ uri: imageFromBase?.image || imageCamera }}
+          style={styles.img}
+          resizeMode="cover"
+        />
       ) : (
         <Image
           style={styles.img}
           resizeMode="cover"
-          source={require("../../assets/user.png")}
+          source={require(defaultImageRoute)}
         />
       )}
-      <Pressable
-        onPress={() => navigation.navigate("ImageSelectorScreen")}
-        style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.6 : 1 }]}
-      >
-        <Text>Add Profile Picture</Text>
-      </Pressable>
+      <AddButton
+        onPress={launchCamera}
+        title={
+          imageFromBase || imageCamera
+            ? "Modify profile picture"
+            : "Add profile picture"
+        }
+      />
+      <AddButton title="My address" onPress={launchLocation} />
     </View>
   );
 }
@@ -45,8 +55,7 @@ const styles = StyleSheet.create({
   img: {
     height: 200,
     width: 200,
-    marginTop: 20,
-    
+    marginVertical: 20,
   },
   btn: {
     backgroundColor: colors.green300,

@@ -6,7 +6,6 @@ import AuthStackNavigator from "./AuthStackNavigator";
 import { useSelector } from "react-redux";
 
 export default function Navigator() {
-  // const [user, setUser] = useState(null);
   const { user } = useSelector((state) => state.auth.value);
 
   return (

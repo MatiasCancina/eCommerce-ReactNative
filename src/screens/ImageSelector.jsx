@@ -4,12 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { colors } from "../global/colors";
 import * as ImagePicker from "expo-image-picker";
 import { setCameraImage } from "../features/UserSlice";
-import { usePostProfileImageMutation } from "../services/shopServices";
+import { useGetProfileImageQuery, usePostProfileImageMutation } from "../services/shopServices";
 
 export default function ImageSelector({ navigation }) {
   const [image, setImage] = useState(null);
   const [triggerPostImage, result] = usePostProfileImageMutation()
+  const { data: imageFromBase } = useGetProfileImageQuery(localId);
+  
   const dispatch = useDispatch();
+  
   const { localId } = useSelector(state => state.auth.value)
 
   const verifyCameraPermissions = async () => {
@@ -52,12 +55,12 @@ export default function ImageSelector({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {image ? (
+      {image || imageFromBase ? (
         <>
           <Image
             style={styles.img}
             resizeMode="contain"
-            source={{ uri: image }}
+            source={{ uri: image || imageFromBase?.image }}
           />
           <Pressable
             onPress={pickImage}
@@ -111,7 +114,6 @@ const styles = StyleSheet.create({
   },
   imgContainer: {
     margin: 10,
-    // border
   },
   btn: {
     backgroundColor: colors.green300,
