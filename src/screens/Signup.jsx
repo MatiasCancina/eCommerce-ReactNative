@@ -30,7 +30,7 @@ const Signup = ({ navigation }) => {
         setUser({
           email: result.data.email,
           idToken: result.data.idToken,
-          // localId: result.data.localId
+          localId: result.data.localId
         })
       );
     }
@@ -38,11 +38,11 @@ const Signup = ({ navigation }) => {
 
   const onSubmit = () => {
     try {
+      setErrorMail("");
       setErrorPassword("");
-      setConfirmPassword("");
       setErrorConfirmPassword("");
-
-      signUpSchema.validateSync();
+      
+      signUpSchema.validateSync({ email, password, confirmPassword });
 
       triggerSignUp({ email, password, returnSecureToken: true });
     } catch (error) {
