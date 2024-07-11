@@ -1,11 +1,13 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { colors } from "../global/colors";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetProfileImageQuery } from "../services/shopServices";
 import AddButton from "../components/AddButton";
+import { clearUser } from "../features/UserSlice";
 
 export default function MyProfile({ navigation }) {
+  const dispatch = useDispatch();
   const { imageCamera, localId } = useSelector((state) => state.auth.value);
   const { data: imageFromBase } = useGetProfileImageQuery(localId);
 
@@ -15,6 +17,10 @@ export default function MyProfile({ navigation }) {
 
   const launchLocation = async () => {
     navigation.navigate("ListAdressScreen");
+  };
+
+  const logOut = async () => {
+    dispatch(clearUser())
   };
 
   const defaultImageRoute = "../../assets/user.png";
@@ -38,11 +44,12 @@ export default function MyProfile({ navigation }) {
         onPress={launchCamera}
         title={
           imageFromBase || imageCamera
-            ? "Modify profile picture"
-            : "Add profile picture"
+            ? "Modify Profile Picture"
+            : "AddProfile Picture"
         }
       />
-      <AddButton title="My address" onPress={launchLocation} />
+      <AddButton title="My Address" onPress={launchLocation} />
+      <AddButton title="Log Out" onPress={logOut} />
     </View>
   );
 }
