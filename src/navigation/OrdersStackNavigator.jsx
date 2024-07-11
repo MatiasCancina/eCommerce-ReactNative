@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Orders from "../screens/Orders";
+import Order from "../screens/Order";
 
 const Stack = createNativeStackNavigator();
 
@@ -10,7 +10,7 @@ export default function OrdersStackNavigator() {
       initialRouteName="OrdersScreen"
       screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="OrdersScreen" component={Orders} />
+      <Stack.Screen name="OrdersScreen" component={Order} />
     </Stack.Navigator>
   );
 }

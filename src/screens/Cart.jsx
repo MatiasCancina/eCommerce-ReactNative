@@ -8,7 +8,7 @@ export default function Cart() {
   const [triggerPostOrder, result] = usePostOrderMutation();
 
   const onConfirmOrder = () => {
-    triggerPostOrder({ items: CartData, user: "Matias", total  });
+    triggerPostOrder({ items: CartData, user: "Matias2", total  });
   };
 
   return (
