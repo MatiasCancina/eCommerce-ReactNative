@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetProfileImageQuery } from "../services/shopServices";
 import AddButton from "../components/AddButton";
 import { clearUser } from "../features/UserSlice";
+import { truncateSessionTable } from "../persistance";
 
 export default function MyProfile({ navigation }) {
   const dispatch = useDispatch();
@@ -20,7 +21,14 @@ export default function MyProfile({ navigation }) {
   };
 
   const logOut = async () => {
-    dispatch(clearUser())
+    try {
+      const response = await truncateSessionTable()
+      console.log(response);
+
+      dispatch(clearUser())
+    } catch (error) {
+      console.log({ErrorSignOutDB: error});
+    }
   };
 
   const defaultImageRoute = "../../assets/user.png";

@@ -7,6 +7,7 @@ import SubmitButton from "../components/SubmitButton";
 import { useDispatch } from "react-redux";
 import { useSignInMutation } from "../services/authServices";
 import { setUser } from "../features/UserSlice";
+import { insertSession } from "../persistance";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState();
@@ -15,18 +16,27 @@ const Login = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const [triggerSignIn, result] = useSignInMutation();
-  
+
   useEffect(() => {
-    if (result.isSuccess) {
-      dispatch(
-        setUser({
-          email: result.data.email,
-          idToken: result.data.idToken,
-          localId:result.data.localId
-        })
-      );
+    if (result?.data && result.isSuccess) {
+      insertSession({
+        email: result.data.email,
+        localId: result.data.localId,
+        token: result.data.idToken
+      }).then((response) => {
+        console.log(response)
+        dispatch(
+          setUser({
+            email: result.data.email,
+            idToken: result.data.idToken,
+            localId: result.data.localId,
+          })
+        );
+      }).catch(err => {
+        console.log(err)
+      })
     }
-  }, [result]);
+  }, [result])
 
   const onSubmit = () => {
     triggerSignIn({
