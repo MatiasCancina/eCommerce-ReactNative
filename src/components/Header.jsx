@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: 100,
-    backgroundColor: colors.brown600,
+    backgroundColor: colors.marineBlue,
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
@@ -23,5 +23,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "500",
     marginTop: 20,
+    color: 'white',
   },
 });

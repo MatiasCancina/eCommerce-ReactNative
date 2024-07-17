@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
     alignItems: "flex-start ",
     borderWidth: 4,
     borderRadius: 10,
-    borderColor: colors.brown600,
-    backgroundColor: colors.brown200,
+    borderColor: colors.midBlue,
+    backgroundColor: colors.pastelBlue,
   },
   title: {
     fontFamily: "Inter-Medium",

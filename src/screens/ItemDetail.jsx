@@ -12,6 +12,8 @@ import { useDispatch } from "react-redux";
 
 import { useGetProductByIdQuery } from "../services/shopServices";
 import { addCartItem } from "../features/CartSlice";
+import { colors } from "../global/colors";
+import { capitalizeFirstLetter } from "../global/capitalizeFirstLetter";
 
 export default function ItemDetail({ route, navigation }) {
   const { width, height } = useWindowDimensions();
@@ -40,12 +42,6 @@ export default function ItemDetail({ route, navigation }) {
 
   return (
     <View>
-      <Button
-        onPress={() => {
-          navigation.goBack();
-        }}
-        title="Back"
-      />
       <View
         style={
           orientation === "portrait"
@@ -53,26 +49,37 @@ export default function ItemDetail({ route, navigation }) {
             : styles.mainContainerLandscape
         }
       >
-        <Image
-          source={{ uri: product.images[0] }}
-          style={
-            orientation === "portrait" ? styles.image : styles.imageLandscape
-          }
-          resizeMode="cover"
-        />
-        <View
-          style={
-            orientation === "portrait"
-              ? styles.textContainer
-              : styles.textContainerLandscape
-          }
-        >
-          <Text>{product.title} </Text>
-          <Text>{product.description} </Text>
-          <Text style={styles.price}>${product.price}</Text>
-          <Button title="Add cart" onPress={handleAddCart} />
+        <View style={styles.cardContainer}>
+          <Image
+            source={{ uri: product.images[0] }}
+            style={
+              orientation === "portrait" ? styles.image : styles.imageLandscape
+            }
+            resizeMode="cover"
+          />
+          <View
+            style={
+              orientation === "portrait"
+                ? styles.textContainer
+                : styles.textContainerLandscape
+            }
+          >
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+
+              <Text style={styles.title}>{capitalizeFirstLetter(product.title)}</Text>
+              <Text style={styles.price}>${product.price}</Text>
+            </View>
+            <Text style={styles.description}>{capitalizeFirstLetter(product.description)} </Text>
+            <Button title="Add cart" onPress={handleAddCart} />
+          </View>
         </View>
       </View>
+      <Button
+        onPress={() => {
+          navigation.goBack();
+        }}
+        title="Back"
+      />
     </View>
   );
 }
@@ -81,9 +88,9 @@ const styles = StyleSheet.create({
   mainContainer: {
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "flex-start",
-    padding: 10,
+    alignItems: "center",
     width: "100%",
+    height: "95%",
   },
   mainContainerLandscape: {
     flexDirection: "row",
@@ -91,6 +98,12 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     padding: 10,
     gap: 10,
+  },
+  cardContainer: {
+    backgroundColor: colors.darkGray,
+    padding: 30,
+    borderRadius: 10,
+    height: '80%',
   },
   image: {
     width: "100%",
@@ -100,7 +113,6 @@ const styles = StyleSheet.create({
     width: "45%",
     height: 200,
   },
-
   textContainer: {
     flexDirection: "column",
   },
@@ -111,7 +123,17 @@ const styles = StyleSheet.create({
     alignItems: "start",
     gap: 10,
   },
+  title: {
+    fontWeight: '600',
+    fontSize: 30,
+    width: '80%',
+  },
+  description: {
+    marginVertical: 20,
+    fontSize: 17,
+  },
   price: {
-    textAlign: "right",
+    fontWeight: '500',
+    fontSize: 25,
   },
 });

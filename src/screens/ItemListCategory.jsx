@@ -57,13 +57,13 @@ export default function ItemListCategory({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.brown100,
+    backgroundColor: colors.lightGray,
     height: '100%',
   },
   error: {
     fontSize: 20,
-    color: colors.brown600,
-    fontWeight: "600",
+    color: 'red',
+    fontWeight: "500",
     textAlign: "center",
     marginTop: 20,
   },

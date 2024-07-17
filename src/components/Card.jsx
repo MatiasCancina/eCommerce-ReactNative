@@ -12,7 +12,6 @@ export default function Card({ children, style }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor:colors.green30000,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

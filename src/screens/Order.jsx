@@ -1,21 +1,38 @@
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Text } from "react-native";
 
 import OrderItem from "../components/OrderItem";
 import { useGetOrdersByUserQuery } from "../services/shopServices";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const Order = () => {
-  const { data: OrderData, isLoading } =
-    useGetOrdersByUserQuery("Matias");
+  const { user } = useSelector((state) => state.auth.value);
+  const { data, isLoading } =
+    useGetOrdersByUserQuery(user);
+  const [orderData, setOrderData] = useState([])
+
+  useEffect(() => {
+    if (data) {
+      setOrderData(data);
+    }
+  },
+    [data])
 
   return (
     <View>
-      <FlatList
-        data={OrderData}
-        keyExtractor={(orderItem) => orderItem}
-        renderItem={({ item }) => {
-          return <OrderItem order={item} />;
-        }}
-      />
+      {orderData.length ?
+        <FlatList
+          data={orderData}
+          keyExtractor={(orderItem) => orderItem}
+          renderItem={({ item }) => {
+            return <OrderItem order={item} />;
+          }}
+        />
+        :
+        <Text style={{ fontSize: 20, fontWeight: '500' }}>
+          No Orders Yet
+        </Text>
+      }
     </View>
   );
 };

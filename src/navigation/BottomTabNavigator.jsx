@@ -30,7 +30,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <View>
-                <FontAwesome5 name="store" size={24} color={focused ? "black" : colors.brown600} />
+                <FontAwesome5 name="store" size={24} color={focused ? colors.golden : 'white'} />
               </View>
             );
           },
@@ -43,7 +43,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <View>
-                <FontAwesome5 name="shopping-cart" size={24} color={focused ? "black" : colors.brown600} />
+                <FontAwesome5 name="shopping-cart" size={24} color={focused ? colors.golden : 'white'} />
               </View>
             );
           },
@@ -56,7 +56,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <View>
-                <FontAwesome5 name="receipt" size={24} color={focused ? "black" : colors.brown600} />
+                <FontAwesome5 name="receipt" size={24} color={focused ? colors.golden : 'white'} />
               </View>
             );
           },
@@ -69,7 +69,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ focused }) => {
             return (
               <View>
-                <FontAwesome5 name="user-alt" size={24} color={focused ? "black" : colors.brown600} />
+                <FontAwesome5 name="user-alt" size={24} color={focused ? colors.golden : 'white'} />
               </View>
             );
           },
@@ -82,7 +82,7 @@ export default function BottomTabNavigator() {
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: colors.green300,
+    backgroundColor: colors.marineBlue,
     height: 60,
   },
 });

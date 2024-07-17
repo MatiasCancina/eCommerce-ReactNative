@@ -24,8 +24,6 @@ export default function Categories({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    // height: '95%',
-    // paddingBottom: 33,
-    backgroundColor: colors.brown100,
+    backgroundColor: colors.lightGray,
   },
 });
