@@ -11,6 +11,7 @@ export default function ImageSelector({ navigation }) {
   const [triggerPostImage, result] = usePostProfileImageMutation()
   const { localId } = useSelector(state => state.auth.value)
   const { data: imageFromBase } = useGetProfileImageQuery(localId);
+  const defaultImageRoute = "../../assets/user.png";
   
   const dispatch = useDispatch();
 
@@ -82,9 +83,11 @@ export default function ImageSelector({ navigation }) {
         </>
       ) : (
         <>
-          <View style={styles.imgContainer}>
-              <Text>No photo to shown</Text>
-          </View>
+            <Image
+              style={styles.img}
+              resizeMode="cover"
+              source={require(defaultImageRoute)}
+            />
           <Pressable
             onPress={pickImage}
             style={({ pressed }) => [
