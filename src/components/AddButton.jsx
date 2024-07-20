@@ -4,15 +4,16 @@ import { colors } from "../global/colors";
 
 const AddButton = ({
   title = "",
-  onPress = () => {},
-  color = colors.brown600,
+  onPress = () => { },
+  style = {},
+  titleStyle = {}
 }) => {
   return (
     <Pressable
-      style={{ ...styles.button, backgroundColor: color }}
+      style={[styles.button, style]}
       onPress={onPress}
     >
-      <Text style={styles.text}>{title}</Text>
+      <Text style={[styles.text, titleStyle]}>{title}</Text>
     </Pressable>
   );
 };
@@ -21,15 +22,14 @@ export default AddButton;
 
 const styles = StyleSheet.create({
   button: {
-    width: "80%",
-    borderWidth: 1,
-    backgroundColor: colors.brown600,
+    borderWidth: 2,
+    backgroundColor: colors.lightGray,
+    borderColor: colors.marineBlue,
+    borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
     padding: 8,
+    paddingHorizontal: 16,
   },
-  text: {
-    fontSize: 18,
-    color: colors.green300,
-  },
+  text: {},
 });

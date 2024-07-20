@@ -4,20 +4,27 @@ import AddButton from "../components/AddButton";
 import AdressItem from "../components/AdressItem";
 import { useSelector } from "react-redux";
 import { useGetLocationQuery } from "../services/shopServices";
+import { colors } from "../global/colors";
+import MapPreview from "../components/MapPreview";
 
 const ListAddress = ({ navigation }) => {
-  //const [location, setLocation] = useState(null)
   const { localId } = useSelector((state) => state.auth.value);
   const { data: location } = useGetLocationQuery(localId);
 
   return location ? (
-    <AdressItem location={location} navigation={navigation} />
+    <>
+      <AdressItem location={location} navigation={navigation} />
+      <MapPreview location={location} />
+    </>
+
   ) : (
     <View style={styles.container}>
       <Text style={styles.text}>No location set</Text>
       <AddButton
-        title="Set location"
+        title="Set Location"
         onPress={() => navigation.navigate("LocationSelectorScreen")}
+        style={{ backgroundColor: colors.lightBlue }}
+        titleStyle={{ color: 'white' }}
       />
     </View>
   );
@@ -27,7 +34,7 @@ export default ListAddress;
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
   },
   text: {

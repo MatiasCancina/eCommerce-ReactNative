@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import React from "react";
+import { colors } from "../global/colors";
 
 const AddressItem = ({ location, navigation }) => {
 
@@ -27,7 +28,7 @@ export default AddressItem;
 const styles = StyleSheet.create({
     card: {
         height: 100,
-        backgroundColor: '#237223',
+        backgroundColor: colors.esmeraldGreen,
         padding: 10,
         margin: 10,
         borderWidth: 2,

@@ -11,10 +11,12 @@ export default function CartItem({ item }) {
           {capitalizeFirstLetter(item.title)}
         </Text>
         <Text>{item.brand}</Text>
-        <Text style={{ fontWeight: '300'}}>Quantity: {item.quantity}</Text>
+        <Text style={{ fontWeight: '300' }}>Quantity: {item.quantity}</Text>
         <Text style={{ fontWeight: 'bold', fontSize: 16, color: colors.esmeraldGreen }}>$ {item.price}</Text>
       </View>
-      <View style={{ height: 100, width: 100, backgroundColor: 'red' }}></View>
+      <View style={{ height: 100, width: 100, backgroundColor: 'red', borderRadius: 8 }}>
+        <Text>no image</Text>
+      </View>
       <Entypo name="trash" size={30} color={"red"} />
     </View>
   );

@@ -45,14 +45,14 @@ const LocationSelector = ({ navigation }) => {
       try {
         if (location.latitude) {
           const url_reverse_geocode = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}&key=${googleMapsApiKey}`;
-          
+
           const response = await fetch(url_reverse_geocode);
-          
+
           const data = await response.json();
 
           setAddres(data.results[0].formatted_address);
         }
-      } catch (error) {}
+      } catch (error) { }
     })();
   }, [location]);
 
@@ -74,16 +74,26 @@ const LocationSelector = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>My Address</Text>
       {location ? (
         <>
-          <Text style={styles.text}>
-            Latitude: {location.latitude} | Longitude: {location.longitude}
-          </Text>
-
           <MapPreview location={location} />
-          <Text style={styles.address}>Formatted address: {address}</Text>
-          <AddButton onPress={onConfirmAddress} title="Confirm address" />
+          <View>
+            <Text style={styles.text}>My Location</Text>
+            <Text style={styles.address}>{address}</Text>
+
+            <View style={{ marginVertical: 10, marginHorizontal: 25, justifyContent: 'space-between', flexDirection: 'row' }}>
+              <View>
+                <Text style={styles.cords}>Latitude</Text>
+                <Text style={styles.cordsNum}>{location.latitude}</Text>
+              </View>
+              <View>
+                <Text style={styles.cords}>Longitude</Text>
+                <Text style={styles.cordsNum}>{location.longitude}</Text>
+
+              </View>
+            </View>
+          </View>
+          <AddButton onPress={onConfirmAddress} title="Confirm Address" style={{ marginTop: 20, backgroundColor: colors.marineBlue, borderWidth: 0 }} titleStyle={{ color: 'white', fontSize: 17 }} />
         </>
       ) : (
         <>
@@ -102,11 +112,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
+    padding: 15,
   },
   text: {
     paddingTop: 20,
     fontSize: 18,
+    fontWeight: '600'
+  },
+  address: {
+    marginTop: 10,
+    fontSize: 17,
+    color: 'gray'
+  },
+  cords: {
+    color: 'gray',
+    fontWeight: '600',
+    fontSize: 15
+  },
+  cordsNum: {
+    fontSize: 17,
   },
   noLocationContainer: {
     width: 200,
@@ -116,9 +141,5 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: "center",
     alignItems: "center",
-  },
-  address: {
-    padding: 10,
-    fontSize: 16,
   },
 });

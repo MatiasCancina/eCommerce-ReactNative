@@ -38,7 +38,7 @@ export default function ItemDetail({ route, navigation }) {
     dispatch(addCartItem({ ...product, quantity: 1 }));
   };
 
-  if (!product) return <Text>Loading...</Text>;
+  if (!product) return <Text style={{ fontSize: 20, fontWeight: '500' }}>Loading...</Text>;
 
   return (
     <View>
@@ -50,13 +50,19 @@ export default function ItemDetail({ route, navigation }) {
         }
       >
         <View style={styles.cardContainer}>
-          <Image
-            source={{ uri: product.images[0] }}
-            style={
-              orientation === "portrait" ? styles.image : styles.imageLandscape
-            }
-            resizeMode="cover"
-          />
+          {product.image ?
+            <Image
+              source={{ uri: product.images[0] }}
+              style={
+                orientation === "portrait" ? styles.image : styles.imageLandscape
+              }
+              resizeMode="cover"
+            />
+            :
+            <Text style={styles.image}>
+              no image
+            </Text>
+          }
           <View
             style={
               orientation === "portrait"

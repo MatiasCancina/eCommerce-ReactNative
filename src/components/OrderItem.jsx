@@ -1,21 +1,36 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { colors } from "../global/colors";
 
 const OrderItem = ({ order }) => {
   const total = order.items.reduce(
     (acc, currentItem) => (acc += currentItem.price * currentItem.quantity),
     0
   );
-console.log(order);
+
   return (
-    <View style={styles.card} onPress={() => {}}>
+    <View style={styles.card}>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>
-          {new Date(order.createdAt).toLocaleString()}
-        </Text>
-        <Text style={styles.text2}>$ {total}</Text>
+        <Text style={[styles.text, { fontSize: 17, fontWeight: '800', color: colors.lightBlue }]}> #{order.id.toUpperCase()} </Text>
+        <Text style={[styles.text, { fontWeight: '700', color: colors.marineBlue, marginTop: 6 }]}>{order.date} </Text>
       </View>
-      <Feather name="search" size={30} color="black" />
+      <View style={styles.tableContainer}>
+        <View style={styles.tableHeader}>
+          <Text style={[styles.tableHeaderText, styles.productColumn]}>Product</Text>
+          <Text style={[styles.tableHeaderText, styles.quantityColumn]}>Quantity</Text>
+          <Text style={[styles.tableHeaderText, styles.priceColumn]}>Price</Text>
+        </View>
+        {order.items.map((item) => (
+          <View style={styles.tableRow} key={item.id}>
+            <Text style={[styles.tableRowText, styles.productColumn]}>{item.title}</Text>
+            <Text style={[styles.tableRowText, styles.quantityColumn]}>{item.quantity}</Text>
+            <Text style={[styles.tableRowText, styles.priceColumn, { color: colors.golden }]}>$ {item.price}</Text>
+          </View>
+        ))}
+        <View style={styles.tableFooter}>
+          <Text style={styles.tableFooterText}>Total:</Text>
+          <Text style={styles.tableFooterText}>$ {total}</Text>
+        </View>
+      </View>
     </View>
   );
 };
@@ -24,28 +39,75 @@ export default OrderItem;
 
 const styles = StyleSheet.create({
   card: {
-    height: 100,
-    backgroundColor: 'lightgray',
+    backgroundColor: colors.pastelBlue,
     padding: 10,
     margin: 10,
+    borderColor: colors.marineBlue,
     borderWidth: 2,
     borderRadius: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: "column",
     alignItems: "center",
   },
   textContainer: {
-    width: "70%",
+    width: "100%",
     flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
   text: {
-    fontSize: 17,
-    color: "black",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   text2: {
     fontSize: 19,
     color: "gray",
+  },
+  tableContainer: {
+    width: '100%',
+    marginTop: 10,
+  },
+  tableHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: colors.marineBlue,
+  },
+  tableHeaderText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: colors.marineBlue,
+  },
+  tableRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.marineBlue,
+  },
+  tableRowText: {
+    fontSize: 14,
+    color: colors.marineBlue,
+  },
+  tableFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+  },
+  tableFooterText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: colors.golden,
+  },
+  productColumn: {
+    flex: 4,
+    textAlign: 'left',
+  },
+  quantityColumn: {
+    flex: 1,
+    textAlign: 'center',
+  },
+  priceColumn: {
+    flex: 1,
+    textAlign: 'right',
   },
 });

@@ -19,11 +19,15 @@ export default function ProductItem({ product, navigation }) {
     <Pressable onPress={handleNavigate}>
       <Card style={styles.container}>
         <Text style={styles.title}>{capitalizeFirstLetter(product.title)}</Text>
-        <Image
-          resizeMode="cover"
-          style={styles.image}
-          source={{ uri: product.images[0] }}
-        />
+        {product.image ?
+          <Image
+            resizeMode="cover"
+            style={styles.image}
+            source={{ uri: product.images[0] }}
+          />
+          :
+          <Text style={styles.image}>no image</Text>
+        }
       </Card>
     </Pressable>
   );

@@ -9,11 +9,10 @@ import { useGetProfileImageQuery, usePostProfileImageMutation } from "../service
 export default function ImageSelector({ navigation }) {
   const [image, setImage] = useState(null);
   const [triggerPostImage, result] = usePostProfileImageMutation()
+  const { localId } = useSelector(state => state.auth.value)
   const { data: imageFromBase } = useGetProfileImageQuery(localId);
   
   const dispatch = useDispatch();
-  
-  const { localId } = useSelector(state => state.auth.value)
 
   const verifyCameraPermissions = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -69,7 +68,7 @@ export default function ImageSelector({ navigation }) {
               { opacity: pressed ? 0.6 : 1 },
             ]}
           >
-            <Text>Take new Photo</Text>
+            <Text style={styles.btnText}>Take new Photo</Text>
           </Pressable>
           <Pressable
             onPress={confirmImage}
@@ -78,13 +77,13 @@ export default function ImageSelector({ navigation }) {
               { opacity: pressed ? 0.6 : 1 },
             ]}
           >
-            <Text>Confirm Photo</Text>
+            <Text style={styles.btnText}>Confirm Photo</Text>
           </Pressable>
         </>
       ) : (
         <>
           <View style={styles.imgContainer}>
-            <Text>No photo to shown</Text>
+              <Text>No photo to shown</Text>
           </View>
           <Pressable
             onPress={pickImage}
@@ -111,17 +110,22 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     marginVertical: 20,
+    borderRadius: 100,
   },
   imgContainer: {
     margin: 10,
   },
   btn: {
-    backgroundColor: colors.green300,
+    backgroundColor: colors.lightBlue,
     width: "80%",
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
     margin: 10,
     borderRadius: 10,
+  },
+  btnText:{
+    color: 'white',
+    fontSize: 16
   },
 });

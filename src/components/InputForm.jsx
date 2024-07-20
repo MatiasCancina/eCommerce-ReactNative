@@ -11,16 +11,18 @@ const InputForm = ({ label, onChange, error = "", isSecure = false }) => {
   };
 
   return (
-    <View style={styles.inputContainer}>
-      <Text style={styles.subtitle}>{label}</Text>
-      <TextInput
-        style={styles.input}
-        value={input}
-        onChangeText={onChangeText}
-        secureTextEntry={isSecure}
-      />
+    <>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          value={input}
+          onChangeText={onChangeText}
+          secureTextEntry={isSecure}
+          placeholder={label}
+        />
+      </View>
       {error ? <Text style={styles.error}>{error}</Text> : null}
-    </View>
+    </>
   );
 };
 
@@ -29,26 +31,34 @@ export default InputForm;
 const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: "column",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
     width: "100%",
-  },
-  subtitle: {
-    width: "90%",
-    fontSize: 16,
+    paddingVertical: 10,
+    color: colors.darkGray,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    // Sombra para iOS
+    shadowColor: '#000',
+    fontWeight: '600',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    // Sombra para Android
+    elevation: 5,
   },
   error: {
-    paddintTop: 2,
+    // paddintTop: 2,
     fontSize: 16,
     color: "red",
     fontStyle: "italic",
   },
   input: {
     width: "90%",
-    borderWidth: 0,
-    borderBottomWidth: 3,
-    borderBottomColor: colors.green300,
-    padding: 2,
+    // padding: 2,
     fontSize: 14,
   },
 });

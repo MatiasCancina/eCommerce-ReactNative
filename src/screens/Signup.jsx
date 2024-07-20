@@ -41,7 +41,7 @@ const Signup = ({ navigation }) => {
       setErrorMail("");
       setErrorPassword("");
       setErrorConfirmPassword("");
-      
+
       signUpSchema.validateSync({ email, password, confirmPassword });
 
       triggerSignUp({ email, password, returnSecureToken: true });
@@ -66,25 +66,30 @@ const Signup = ({ navigation }) => {
   return (
     <View style={styles.main}>
       <View style={styles.container}>
-        <Text style={styles.title}>Signup</Text>
-        <InputForm label={"email"} onChange={setEmail} error={errorMail} />
+        <Text style={styles.title}>Create you Account</Text>
+        <InputForm label={"Email"} onChange={setEmail} error={errorMail} />
         <InputForm
-          label={"password"}
+          label={"Password"}
           onChange={setPassword}
           error={errorPassword}
           isSecure={true}
         />
         <InputForm
-          label={"confirm password"}
+          label={"Confirm Password"}
           onChange={setConfirmPassword}
           error={errorConfirmPassword}
           isSecure={true}
         />
+        
         <SubmitButton onPress={onSubmit} title="Send" />
+        
+        <View style={{flexDirection: 'row', gap: 3, justifyContent: 'center'}}>
         <Text style={styles.sub}>Already have an account?</Text>
+        
         <Pressable onPress={() => navigation.navigate("Login")}>
           <Text style={styles.subLink}>Login</Text>
         </Pressable>
+        </View>
       </View>
     </View>
   );
@@ -98,26 +103,30 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.lightGray,
   },
   container: {
     width: "90%",
     flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: colors.brown100,
     gap: 15,
     paddingVertical: 20,
     borderRadius: 10,
   },
   title: {
     fontSize: 22,
+    textAlign: 'left',
+    marginBottom: 10,
+    fontSize: 25,
+    color: colors.midBlue,
+    fontWeight: '600'
   },
   sub: {
     fontSize: 14,
-    color: "black",
+    color: 'gray',
   },
   subLink: {
     fontSize: 14,
-    color: "blue",
+    fontWeight: '600',
+    color: '#666565',
   },
 });
