@@ -1,15 +1,17 @@
 import { FlatList, TouchableOpacity, StyleSheet, Text, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import CartItem from "../components/CartItem";
-import { useSelector } from "react-redux";
-import { usePostOrderMutation, useGetOrdersByUserQuery } from "../services/shopServices";
+import { clearCart } from "../features/CartSlice";
 import { colors } from "../global/colors";
+import { usePostOrderMutation, useGetOrdersByUserQuery } from "../services/shopServices";
 import uuid from 'react-native-uuid'
 
-export default function Cart() {
+export default function Cart({ navigation }) {
+  const dispatch = useDispatch()
   const { items: CartData, total } = useSelector((state) => state.cart.value);
   const { user } = useSelector((state) => state.auth.value);
-  const [triggerPostOrder, result] = usePostOrderMutation();
   const { refetch } = useGetOrdersByUserQuery(user);
+  const [triggerPostOrder, result] = usePostOrderMutation();
 
   const getCurrentDate = () => {
     const date = new Date();
@@ -30,6 +32,7 @@ export default function Cart() {
         date: orderDate
       }).unwrap();
       refetch();
+      dispatch(clearCart())
     } catch (error) {
       console.error("Failed to confirm order: ", error);
     }
