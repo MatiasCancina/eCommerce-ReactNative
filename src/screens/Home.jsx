@@ -14,7 +14,7 @@ export default function Home({ navigation }) {
 
   return (
     <View style={{ height: "95%" }}>
-      <Button onPress={() => goUs()} title="Go Us" />
+      <Button onPress={() => goUs()} title="About Us" />
       <Categories navigation={navigation} />
     </View>
   );
