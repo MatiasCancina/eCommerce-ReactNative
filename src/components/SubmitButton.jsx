@@ -1,12 +1,12 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { colors } from "../global/colors";
 
 const SubmitButton = ({ onPress, title }) => {
   return (
-    <Pressable onPress={onPress} style={styles.button}>
+    <TouchableOpacity onPress={onPress} style={styles.button}>
       <Text style={styles.text}>{title}</Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
