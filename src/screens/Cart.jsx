@@ -1,4 +1,4 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, TouchableOpacity, StyleSheet, Text, View } from "react-native";
 import CartItem from "../components/CartItem";
 import { useSelector } from "react-redux";
 import { usePostOrderMutation, useGetOrdersByUserQuery } from "../services/shopServices";
@@ -54,9 +54,9 @@ export default function Cart() {
                 <Text style={{ color: '#000000c5', fontWeight: '600', fontSize: 20 }}>${total}</Text>
               }
             </View>
-            <Pressable onPress={onConfirmOrder} style={styles.confirmOrder}>
+            <TouchableOpacity onPress={onConfirmOrder} style={styles.confirmOrder}>
               <Text style={{ fontSize: 20, fontWeight: '500', color: 'white', }}>Confirm Order</Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </>
         : <Text style={{ fontSize: 20, fontWeight: '500' }}>No Products on Cart</Text>}
