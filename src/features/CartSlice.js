@@ -50,8 +50,19 @@ export const cartSlice = createSlice({
             }
         },
         removeCartItem: (state, { payload }) => {
-            //Logic to remove product
+            const itemsUpdated = state.value.items.filter((item) => item.id !== payload);
+            const total = itemsUpdated.reduce(
+                (acc, currentItem) => (acc += currentItem.price * currentItem.quantity),
+                0
+            );
+            state.value = {
+                ...state.value,
+                items: itemsUpdated,
+                total,
+                updatedAt: new Date().toLocaleString(),
+            };
         },
+
     },
 });
 
