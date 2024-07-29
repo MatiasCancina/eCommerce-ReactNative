@@ -6,15 +6,15 @@ import { useSelector } from "react-redux";
 
 const Order = () => {
   const { user } = useSelector((state) => state.auth.value);
-  const { data, isLoading } = useGetOrdersByUserQuery(user);
+  const { data: orders, isLoading } = useGetOrdersByUserQuery(user);
 
   return (
     <View>
       {isLoading ? (
         <Text style={{ fontSize: 20, fontWeight: '500' }}>Loading...</Text>
-      ) : data.length ? (
+      ) : orders.length ? (
         <FlatList
-          data={data}
+          data={orders}
           keyExtractor={(orderItem) => orderItem.id.toString()}
           renderItem={({ item }) => <OrderItem order={item} />}
         />

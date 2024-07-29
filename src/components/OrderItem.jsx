@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.marineBlue,
   },
   tableRowText: {
-    fontSize: 14,
+    fontSize: 13,
     color: colors.marineBlue,
   },
   tableFooter: {
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
   quantityColumn: {
     flex: 1,
     textAlign: 'center',
+    fontSize: 13
   },
   priceColumn: {
     flex: 1,

@@ -18,7 +18,7 @@ const RecentOrders = ({ orders }) => {
                     return (
                         <View style={styles.tableRow} key={order.id.toUpperCase()}>
                             <Text style={[styles.tableRowText, styles.productColumn, { fontSize: 10 }]}>#{order.id.toUpperCase()}</Text>
-                            <Text style={[styles.tableRowText, styles.quantityColumn, { fontSize: 10 }]}>{order.date}</Text>
+                            <Text style={[styles.tableRowText, styles.quantityColumn, { fontSize: 9 }]}>{order.date}</Text>
                             <Text style={[styles.tableRowText, styles.priceColumn, { color: colors.golden }]}>$ {orderTotal}</Text>
                         </View>
                     );
