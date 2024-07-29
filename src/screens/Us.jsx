@@ -1,9 +1,7 @@
 import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-export default function Us({ navigation, route }) {
-  const { id } = route.params;
-
+export default function Us({ navigation, route }) {r
   const goHome = () => {
     navigation.navigate("Home");
   };
