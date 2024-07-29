@@ -51,14 +51,12 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   error: {
-    // paddintTop: 2,
     fontSize: 16,
     color: "red",
     fontStyle: "italic",
   },
   input: {
     width: "90%",
-    // padding: 2,
     fontSize: 14,
   },
 });

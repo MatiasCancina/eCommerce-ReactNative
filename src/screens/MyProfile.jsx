@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.lightGray,
-    // marginBottom: 120
   },
   innerContainer: {
     marginTop: '30%',
