@@ -19,7 +19,7 @@ export default function ProductItem({ product, navigation }) {
     <Pressable onPress={handleNavigate}>
       <Card style={styles.container}>
         <Text style={styles.title}>{capitalizeFirstLetter(product.title)}</Text>
-        {product.image ?
+        {product.images ?
           <Image
             resizeMode="cover"
             style={styles.image}

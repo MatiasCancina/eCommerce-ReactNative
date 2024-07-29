@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { colors } from "../global/colors";
 import { capitalizeFirstLetter } from "../global/capitalizeFirstLetter";
@@ -22,9 +22,13 @@ export default function CartItem({ item }) {
         <Text style={{ fontWeight: '300' }}>Quantity: {item.quantity}</Text>
         <Text style={{ fontWeight: 'bold', fontSize: 16, color: colors.esmeraldGreen }}>$ {item.price}</Text>
       </View>
-      <View style={{ height: 100, width: 100, backgroundColor: 'red', borderRadius: 8 }}>
-        <Text>no image</Text>
-      </View>
+      <Image
+        resizeMode="cover"
+        style={styles.image}
+        source={{ uri: item.images[0] }}
+        width={'20%'}
+        height={100}
+      />
       <Pressable onPress={handleRemoveItem}>
         <Entypo name="trash" size={30} color={"red"} />
       </Pressable>

@@ -2,11 +2,9 @@
   { "label": "smartphones", "icon": { "name": "smartphone", "size": 24, "color": "black" } },
   { "label": "laptops", "icon": { "name": "monitor", "size": 24, "color": "black" } },
   { "label": "fragrances", "icon": { "name": "droplet", "size": 24, "color": "black" } },
-  { "label": "skincare", "icon": { "name": "heart", "size": 24, "color": "black" } },
   { "label": "groceries", "icon": { "name": "shopping-cart", "size": 24, "color": "black" } },
   { "label": "home-decoration", "icon": { "name": "home", "size": 24, "color": "black" } },
   { "label": "furniture", "icon": { "name": "box", "size": 24, "color": "black" } },
-  { "label": "tops", "icon": { "name": "chevrons-up", "size": 24, "color": "black" } },
   { "label": "womens-dresses", "icon": { "name": "shopping-bag", "size": 24, "color": "black" } },
   { "label": "womens-shoes", "icon": { "name": "shopping-bag", "size": 24, "color": "black" } },
   { "label": "mens-shirts", "icon": { "name": "shopping-bag", "size": 24, "color": "black" } },
@@ -17,6 +15,5 @@
   { "label": "womens-jewellery", "icon": { "name": "shopping-bag", "size": 24, "color": "black" } },
   { "label": "sunglasses", "icon": { "name": "sun", "size": 24, "color": "black" } },
   { "label": "automotive", "icon": { "name": "tool", "size": 24, "color": "black" } },
-  { "label": "motorcycle", "icon": { "name": "truck", "size": 24, "color": "black" } },
-  { "label": "lighting", "icon": { "name": "sun", "size": 24, "color": "black" } }
+  { "label": "motorcycle", "icon": { "name": "truck", "size": 24, "color": "black" } }
 ]

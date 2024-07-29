@@ -50,7 +50,7 @@ export default function ItemDetail({ route, navigation }) {
         }
       >
         <View style={styles.cardContainer}>
-          {product.image ?
+          {product.images ?
             <Image
               source={{ uri: product.images[0] }}
               style={
@@ -110,9 +110,11 @@ const styles = StyleSheet.create({
     padding: 30,
     borderRadius: 10,
     height: '80%',
+    width: '100%',
+    alignItems:'center'
   },
   image: {
-    width: "100%",
+    width: 260,
     height: 250,
   },
   imageLandscape: {
